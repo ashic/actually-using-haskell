@@ -1,0 +1,19 @@
+---
+title: "Actually Using Haskell"
+author: "Ashic Mahtab (@ashic)"
+date: "1 November 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Stack
+
+```
+  stack new auh
+  cd auth
+  stack build
+  stach exec auh-exe
+```
