@@ -1,13 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Api
     ( whatsTheTime,
-      getToDos  
+      getToDos,
+      getToDo  
     ) where
 
 import Data.Time (getCurrentTime)
+import Control.Monad.Identity
+import Control.Monad.IO.Class
 import Model
 import DB
 import Database.CQL.Protocol
+import Database.CQL.IO
+
 import Data.Text hiding (map)
 
 whatsTheTime :: IO String
@@ -29,3 +34,7 @@ getToDos2 db = do
 getToDos db =
     map toDo <$>
     cqlQuery ("SELECT id, description from todos.todos;" :: QueryString R() (Text, Text)) () db
+
+getToDo identifier db =
+    fmap toDo <$>
+    cqlQuery1 ("SELECT id, description from todos.todos where id=?;" :: QueryString R (Identity Text) (Text, Text)) identifier  db

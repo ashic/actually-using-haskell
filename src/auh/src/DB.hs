@@ -24,8 +24,12 @@ connect = do
 cqlParams :: Tuple a => a -> QueryParams a
 cqlParams p = QueryParams One False p Nothing Nothing Nothing
 
-cqlQuery queryString params client  = 
-    runClient client $ query queryString $ cqlParams params
+cqlQuery queryString p client  = 
+    runClient client $ query queryString $ cqlParams p
+
+
+cqlQuery1 queryString p client  = 
+    runClient client $ query1 queryString $ cqlParams p
     
 
 

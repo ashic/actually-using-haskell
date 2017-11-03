@@ -27,14 +27,15 @@ routes c = do
     get "/todos" $ do
         items <- liftIO $ getToDos c
         json items
+    
+    get "/todos/:p" $ do
+        p <- param "p"
+        items <- liftIO $ getToDo (fromString p) c
+        json items
 
 
 
 main :: IO ()
 main = do
     c <- connect
-    
-    --res <- runClient c $ query ("SELECT id, description from todos.todos;":: QueryString R() (Text, Text)) $ cqlParams ()
-    -- res <- getToDos c
-    -- print res
     scotty 3000 $ routes c
