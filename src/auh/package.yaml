@@ -23,6 +23,12 @@ library:
   dependencies:
   - time
   - scotty
+  - aeson
+  - cql-io
+  - tinylog
+  - cql
+  - mtl
+  - text
 
 executables:
   auh-exe:
@@ -33,7 +39,14 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - scotty
     - auh
+    - aeson
+    - cql-io
+    - tinylog
+    - cql
+    - mtl
+    - text
 
 tests:
   auh-test:
