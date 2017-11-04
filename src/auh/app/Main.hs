@@ -7,6 +7,7 @@ module Main where
 
 import Api
 import DB
+import Model
 import Web.Scotty
 import Control.Monad.IO.Class
 import Control.Monad
@@ -32,6 +33,11 @@ routes c = do
         p <- param "p"
         items <- liftIO $ getToDo (fromString p) c
         json items
+
+    put "/todos" $ do
+        item <- jsonData :: ActionM ToDo
+        _ <- liftIO $ upsertToDo item c
+        text "saved successfully"
 
 
 

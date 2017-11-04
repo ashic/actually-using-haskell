@@ -32,5 +32,7 @@ cqlQuery1 queryString p client  =
     runClient client $ query1 queryString $ cqlParams p
     
 
+cqlWrite1 queryString p client = 
+    runClient client $ write queryString $ cqlParams p
 
-        
+    

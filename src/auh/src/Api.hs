@@ -2,7 +2,8 @@
 module Api
     ( whatsTheTime,
       getToDos,
-      getToDo  
+      getToDo,
+      upsertToDo
     ) where
 
 import Data.Time (getCurrentTime)
@@ -38,3 +39,9 @@ getToDos db =
 getToDo identifier db =
     fmap toDo <$>
     cqlQuery1 ("SELECT id, description from todos.todos where id=?;" :: QueryString R (Identity Text) (Text, Text)) identifier  db
+
+upsertToDo item = 
+    cqlWrite1  ("INSERT INTO todos.todos (id, description) values (?, ?);" :: QueryString W (Text, Text) ()) $ tupleFromToDo item
+
+upsertToDo2 item db = 
+    cqlWrite1  ("INSERT INTO todos.todos (id, description) values (?, ?);" :: QueryString W (Text, Text) ()) (tupleFromToDo item) db

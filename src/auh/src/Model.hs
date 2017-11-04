@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 
 module Model
      where
@@ -13,3 +14,4 @@ instance ToJSON ToDo
 instance FromJSON ToDo
 
 toDo (identifier, description) = ToDo {Model.id=identifier, description=description}
+tupleFromToDo item = (Model.id item, description item)
