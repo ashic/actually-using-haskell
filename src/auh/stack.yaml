@@ -39,13 +39,13 @@ packages:
 - .
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
-# extra-deps: [ hascas-1.2.0 ]
+extra-deps: [ hw-kafka-client-2.1.0 ]
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
 
 # Extra package databases containing global packages
-# extra-package-dbs: []
+extra-package-dbs: []
 
 # Control whether we use the GHC we find on the path
 # system-ghc: true

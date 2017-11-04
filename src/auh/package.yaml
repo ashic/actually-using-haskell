@@ -17,6 +17,8 @@ extra-source-files:
 
 dependencies:
 - base >= 4.7 && < 5
+- hw-kafka-client
+- bytestring
 
 library:
   source-dirs: src
