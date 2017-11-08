@@ -1,0 +1,23 @@
+---
+title: "Actually Using Haskell"
+author: "Ashic Mahtab (@ashic)"
+date: "1 November 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Stack
+
+https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a
+
+archlinux stack fix: https://github.com/commercialhaskell/stack/issues/2712#issuecomment-260804267 
+
+```
+  stack new auh
+  cd auth
+  stack build
+  stach exec auh-exe
+```
