@@ -5,7 +5,7 @@
 
 module Main where
 
-import Api
+import Handlers
 import DB
 import Model
 import Audit

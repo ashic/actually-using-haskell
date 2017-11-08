@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Api
+module Handlers
     ( whatsTheTime,
       getToDos,
       getToDo,
