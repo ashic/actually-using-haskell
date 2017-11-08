@@ -1,3 +1,5 @@
 .stack-work/
 auh.cabal
 *~
+.fuse*
+*.swp
