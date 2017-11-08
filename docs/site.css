@@ -1,0 +1,41 @@
+body {
+  background: #ffc733;
+}
+
+h1, h2, body, p, div {
+  font-family: consolas !important;
+}
+
+section.two-col p {
+  float:right;
+  width: 40%;
+}
+
+section.two-col ul {
+  float:left;
+  width: 50%;
+}
+
+.right {
+  float: right
+}
+
+.left {
+  float:left
+}
+
+.reveal ul {
+    list-style-type: square;
+}
+
+.smaller-img img {
+  width:80%;
+}
+
+.full-img {
+  width: 70%;
+}
+
+.small-img {
+  width: 8em;
+}
