@@ -455,13 +455,37 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h3 class="date">1 November 2017</h3>
 </section>
 
-<section id="stack" class="slide level2">
+<section><section id="project" class="titleslide slide level1"><h1>Project</h1></section><section id="templates" class="slide level2">
+<h2>Templates</h2>
+<pre><code>stack templates</code></pre>
+</section><section id="stack" class="slide level2">
 <h2>Stack</h2>
-<pre><code>  stack new auh
+<pre><code>  stack new auh [template]
   cd auth
   stack build
   stack exec auh-exe</code></pre>
-</section>
+</section></section>
+<section><section id="adding-dependencies" class="titleslide slide level1"><h1>Adding Dependencies</h1></section><section id="hpack" class="slide level2">
+<h2>hpack :)</h2>
+</section><section id="no-hpack" class="slide level2">
+<h2>no-hpack :(</h2>
+<p>auh.cabal</p>
+<pre><code>library
+  hs-source-dirs:      src
+  exposed-modules:     Lib
+  build-depends:       
+      base &gt;= 4.7 &amp;&amp; &lt; 5
+    , hw-kafka-client
+    , bytestring
+    , time
+    , scotty
+    , aeson
+    , cql-io
+    , tinylog
+    , cql
+    , mtl
+    , text</code></pre>
+</section></section>
 <section><section id="resources" class="titleslide slide level1"><h1>Resources</h1></section><section id="useful-links" class="slide level2">
 <h2>Useful Links</h2>
 <p><a href="https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a" class="uri">https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a</a></p>

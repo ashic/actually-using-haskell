@@ -13,15 +13,57 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Stack
+# Project
 
+## Templates
 
 ```
-  stack new auh
+stack templates
+```
+
+## Stack
+
+```
+  stack new auh [template]
   cd auth
   stack build
   stack exec auh-exe
 ```
+
+
+# Adding Dependencies
+
+## hpack :)
+
+## no-hpack :(
+
+auh.cabal
+
+```
+library
+  hs-source-dirs:      src
+  exposed-modules:     Lib
+  build-depends:       
+      base >= 4.7 && < 5
+    , hw-kafka-client
+    , bytestring
+    , time
+    , scotty
+    , aeson
+    , cql-io
+    , tinylog
+    , cql
+    , mtl
+    , text
+```
+
+## stack.yaml
+
+```
+extra-deps: [hw-kafka-client-2.1.0]
+```
+
+
 
 
 # Resources
