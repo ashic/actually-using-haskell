@@ -20,6 +20,7 @@ library
     , Model
     , Handlers
     , DB
+    , Audit
   build-depends:       
       base >= 4.7 && < 5
     , hw-kafka-client

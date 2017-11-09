@@ -206,7 +206,41 @@ upsertToDo item =
         :: QueryString W (Text, Text) ()) $ tupleFromToDo item
 ```
 
+## Finally... Kafka
+
+```
+record key msg kafka =
+    produceMessage kafka record 
+    where 
+        record = ProducerRecord
+                  { prTopic = targetTopic
+                  , prPartition = UnassignedPartition
+                  , prKey = Just $ B.pack key
+                  , prValue = Just $ B.pack msg
+                  }
+```
+
+## Finally...Kafka
+
+```
+    get "/todos/:p" $ do
+        p <- param "p"
+        record "access" ("GET /todos/" ++ p) audit
+        items <- liftIO $ getToDo (fromString p) c
+        json items
+
+    put "/todos" $ do
+        record "access" "PUT /todos/" audit
+        item <- jsonData :: ActionM ToDo
+        _ <- liftIO $ upsertToDo item c
+        text "saved successfully"
+```
+
 # Resources
+
+## Book
+
+* http://haskellbook.com/ (Christopher Allen)
 
 ## Useful Links
 

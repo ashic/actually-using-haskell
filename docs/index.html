@@ -601,8 +601,37 @@ getToDo identifier db =
 upsertToDo item = 
     cqlWrite1 (&quot;INSERT INTO todos.todos (id, description) values (?, ?);&quot; 
         :: QueryString W (Text, Text) ()) $ tupleFromToDo item</code></pre>
+</section><section id="finally-kafka" class="slide level2">
+<h2>Finally… Kafka</h2>
+<pre><code>record key msg kafka =
+    produceMessage kafka record 
+    where 
+        record = ProducerRecord
+                  { prTopic = targetTopic
+                  , prPartition = UnassignedPartition
+                  , prKey = Just $ B.pack key
+                  , prValue = Just $ B.pack msg
+                  }</code></pre>
+</section><section id="finallykafka" class="slide level2">
+<h2>Finally…Kafka</h2>
+<pre><code>    get &quot;/todos/:p&quot; $ do
+        p &lt;- param &quot;p&quot;
+        record &quot;access&quot; (&quot;GET /todos/&quot; ++ p) audit
+        items &lt;- liftIO $ getToDo (fromString p) c
+        json items
+
+    put &quot;/todos&quot; $ do
+        record &quot;access&quot; &quot;PUT /todos/&quot; audit
+        item &lt;- jsonData :: ActionM ToDo
+        _ &lt;- liftIO $ upsertToDo item c
+        text &quot;saved successfully&quot;</code></pre>
 </section></section>
-<section><section id="resources" class="titleslide slide level1"><h1>Resources</h1></section><section id="useful-links" class="slide level2">
+<section><section id="resources" class="titleslide slide level1"><h1>Resources</h1></section><section id="book" class="slide level2">
+<h2>Book</h2>
+<ul>
+<li><a href="http://haskellbook.com/" class="uri">http://haskellbook.com/</a> (Christopher Allen)</li>
+</ul>
+</section><section id="useful-links" class="slide level2">
 <h2>Useful Links</h2>
 <p><a href="https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a" class="uri">https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a</a></p>
 <p>archlinux stack fix: <a href="https://github.com/commercialhaskell/stack/issues/2712#issuecomment-260804267" class="uri">https://github.com/commercialhaskell/stack/issues/2712#issuecomment-260804267</a></p>
