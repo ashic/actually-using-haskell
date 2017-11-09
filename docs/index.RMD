@@ -13,6 +13,20 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Haskell?
+
+## Let's talk about...
+
+* Scala
+* Go
+* Rust....
+
+## Why do we have a compiler?
+
+## Yeah yeah, we still need tests...
+
+## Abstraction
+
 # Project
 
 ## Templates
@@ -236,13 +250,16 @@ record key msg kafka =
         text "saved successfully"
 ```
 
-# Resources
 
-## Book
+# Thanks
 
-* http://haskellbook.com/ (Christopher Allen)
+## Resources 
 
-## Useful Links
+### Book
+
+http://haskellbook.com/ (Christopher Allen)
+
+### Useful Links
 
 https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a
 
