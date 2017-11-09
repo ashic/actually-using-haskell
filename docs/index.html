@@ -530,6 +530,27 @@ someFunc = putStrLn $
            toDo (&quot;something&quot;, &quot;description of something&quot;)
 </code></pre>
 </section></section>
+<section><section id="an-api" class="titleslide slide level1"><h1>An Api</h1></section><section id="main.hs" class="slide level2">
+<h2>Main.hs</h2>
+<pre><code>{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Model
+import Data.String
+import Web.Scotty
+
+routes = do
+
+    get &quot;/hello&quot; $ text &quot;hello&quot;
+
+    get &quot;/hello/:name&quot; $ do
+        name &lt;- param &quot;name&quot;
+        text $ fromString $ &quot;Hello &quot; ++ name
+
+main :: IO ()
+main = scotty 3000 routes</code></pre>
+</section></section>
 <section><section id="resources" class="titleslide slide level1"><h1>Resources</h1></section><section id="useful-links" class="slide level2">
 <h2>Useful Links</h2>
 <p><a href="https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a" class="uri">https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-on-macos-d2cc1ce9f60a</a></p>
