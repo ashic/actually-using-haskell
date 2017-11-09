@@ -19,6 +19,7 @@ library
       Lib
     , Model
     , Handlers
+    , DB
   build-depends:       
       base >= 4.7 && < 5
     , hw-kafka-client

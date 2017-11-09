@@ -141,7 +141,7 @@ main = scotty 3000 routes
 
 # Doing something "Useful"
 
-## Side effect
+## Side effects
 
 ```
 {-# LANGUAGE OverloadedStrings #-}
@@ -163,6 +163,47 @@ whatsTheTime = do
 get "/time" $ do
     res <- liftIO whatsTheTime
     text $ fromString res
+```
+
+## Add me some db
+
+```
+getToDos db =
+    map toDo <$>
+    cqlQuery ("SELECT id, description from todos.todos;" 
+      :: QueryString R() (Text, Text)) () db
+```
+
+## Add me some db
+
+```
+getToDos db =
+    map toDo <$>
+    cqlQuery ("SELECT id, description from todos.todos;" 
+      :: QueryString R() (Text, Text)) () db
+      
+getToDo identifier db =
+    fmap toDo <$>
+    cqlQuery1 ("SELECT id, description from todos.todos where id=?;" 
+        :: QueryString R (Identity Text) (Text, Text)) identifier  db
+```
+
+## Add me some db
+
+```
+getToDos db =
+    map toDo <$>
+    cqlQuery ("SELECT id, description from todos.todos;" 
+      :: QueryString R() (Text, Text)) () db
+      
+getToDo identifier db =
+    fmap toDo <$>
+    cqlQuery1 ("SELECT id, description from todos.todos where id=?;" 
+        :: QueryString R (Identity Text) (Text, Text)) identifier  db
+        
+upsertToDo item = 
+    cqlWrite1 ("INSERT INTO todos.todos (id, description) values (?, ?);" 
+        :: QueryString W (Text, Text) ()) $ tupleFromToDo item
 ```
 
 # Resources

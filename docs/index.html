@@ -551,8 +551,8 @@ routes = do
 main :: IO ()
 main = scotty 3000 routes</code></pre>
 </section></section>
-<section><section id="doing-something-useful" class="titleslide slide level1"><h1>Doing something “Useful”</h1></section><section id="side-effect" class="slide level2">
-<h2>Side effect</h2>
+<section><section id="doing-something-useful" class="titleslide slide level1"><h1>Doing something “Useful”</h1></section><section id="side-effects" class="slide level2">
+<h2>Side effects</h2>
 <pre><code>{-# LANGUAGE OverloadedStrings #-}
 module Handlers
     ( whatsTheTime
@@ -564,6 +564,43 @@ whatsTheTime :: IO String
 whatsTheTime = do
     time &lt;- getCurrentTime
     return $ &quot;The time is now &quot; ++ show time </code></pre>
+</section><section id="main" class="slide level2">
+<h2>Main</h2>
+<pre><code>get &quot;/time&quot; $ do
+    res &lt;- liftIO whatsTheTime
+    text $ fromString res</code></pre>
+</section><section id="add-me-some-db" class="slide level2">
+<h2>Add me some db</h2>
+<pre><code>getToDos db =
+    map toDo &lt;$&gt;
+    cqlQuery (&quot;SELECT id, description from todos.todos;&quot; 
+      :: QueryString R() (Text, Text)) () db</code></pre>
+</section><section id="add-me-some-db-1" class="slide level2">
+<h2>Add me some db</h2>
+<pre><code>getToDos db =
+    map toDo &lt;$&gt;
+    cqlQuery (&quot;SELECT id, description from todos.todos;&quot; 
+      :: QueryString R() (Text, Text)) () db
+      
+getToDo identifier db =
+    fmap toDo &lt;$&gt;
+    cqlQuery1 (&quot;SELECT id, description from todos.todos where id=?;&quot; 
+        :: QueryString R (Identity Text) (Text, Text)) identifier  db</code></pre>
+</section><section id="add-me-some-db-2" class="slide level2">
+<h2>Add me some db</h2>
+<pre><code>getToDos db =
+    map toDo &lt;$&gt;
+    cqlQuery (&quot;SELECT id, description from todos.todos;&quot; 
+      :: QueryString R() (Text, Text)) () db
+      
+getToDo identifier db =
+    fmap toDo &lt;$&gt;
+    cqlQuery1 (&quot;SELECT id, description from todos.todos where id=?;&quot; 
+        :: QueryString R (Identity Text) (Text, Text)) identifier  db
+        
+upsertToDo item = 
+    cqlWrite1 (&quot;INSERT INTO todos.todos (id, description) values (?, ?);&quot; 
+        :: QueryString W (Text, Text) ()) $ tupleFromToDo item</code></pre>
 </section></section>
 <section><section id="resources" class="titleslide slide level1"><h1>Resources</h1></section><section id="useful-links" class="slide level2">
 <h2>Useful Links</h2>
