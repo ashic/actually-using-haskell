@@ -18,6 +18,7 @@ library
   exposed-modules:     
       Lib
     , Model
+    , Handlers
   build-depends:       
       base >= 4.7 && < 5
     , hw-kafka-client

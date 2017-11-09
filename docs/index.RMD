@@ -139,6 +139,32 @@ main :: IO ()
 main = scotty 3000 routes
 ```
 
+# Doing something "Useful"
+
+## Side effect
+
+```
+{-# LANGUAGE OverloadedStrings #-}
+module Handlers
+    ( whatsTheTime
+    ) where
+
+import Data.Time (getCurrentTime)
+
+whatsTheTime :: IO String
+whatsTheTime = do
+    time <- getCurrentTime
+    return $ "The time is now " ++ show time 
+```
+
+## Main
+
+```
+get "/time" $ do
+    res <- liftIO whatsTheTime
+    text $ fromString res
+```
+
 # Resources
 
 ## Useful Links
