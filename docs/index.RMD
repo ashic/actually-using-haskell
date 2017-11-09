@@ -255,6 +255,12 @@ record key msg kafka =
 
 ## Resources 
 
+### Slides
+[https://ashic.github.io/actually-using-haskell/#/](https://ashic.github.io/actually-using-haskell/#/)
+
+### Code 
+[https://github.com/ashic/actually-using-haskell](https://github.com/ashic/actually-using-haskell)
+
 ### Book
 
 http://haskellbook.com/ (Christopher Allen)
