@@ -63,8 +63,56 @@ library
 extra-deps: [hw-kafka-client-2.1.0]
 ```
 
+# Model
 
+## Model.hs
 
+```
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+
+module Model
+     where
+
+import GHC.Generics
+import Data.Aeson (FromJSON, ToJSON)
+import Data.Text
+
+data ToDo = ToDo {id :: Text, description :: Text} deriving (
+    Show, Generic)
+instance ToJSON ToDo
+instance FromJSON ToDo
+
+toDo (identifier, description) = 
+  ToDo {Model.id=identifier, description=description}
+tupleFromToDo item = (Model.id item, description item)
+```
+
+## Expose in auh.cabal
+
+```
+exposed-modules:     
+    Lib
+  , Model
+```
+
+## Use in Lib.hs
+
+```
+{-# LANGUAGE OverloadedStrings #-}
+
+module Lib
+    ( someFunc
+    ) where
+
+import Model
+
+someFunc :: IO ()
+someFunc = putStrLn $ 
+           show $ 
+           toDo ("something", "description of something")
+
+```
 
 # Resources
 

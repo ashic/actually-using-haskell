@@ -485,6 +485,50 @@ document.getElementsByTagName('head')[0].appendChild(style);
     , cql
     , mtl
     , text</code></pre>
+</section><section id="stack.yaml" class="slide level2">
+<h2>stack.yaml</h2>
+<pre><code>extra-deps: [hw-kafka-client-2.1.0]</code></pre>
+</section></section>
+<section><section id="model" class="titleslide slide level1"><h1>Model</h1></section><section id="model.hs" class="slide level2">
+<h2>Model.hs</h2>
+<pre><code>{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+
+module Model
+     where
+
+import GHC.Generics
+import Data.Aeson (FromJSON, ToJSON)
+import Data.Text
+
+data ToDo = ToDo {id :: Text, description :: Text} deriving (
+    Show, Generic)
+instance ToJSON ToDo
+instance FromJSON ToDo
+
+toDo (identifier, description) = 
+  ToDo {Model.id=identifier, description=description}
+tupleFromToDo item = (Model.id item, description item)</code></pre>
+</section><section id="expose-in-auh.cabal" class="slide level2">
+<h2>Expose in auh.cabal</h2>
+<pre><code>exposed-modules:     
+    Lib
+  , Model</code></pre>
+</section><section id="use-in-lib.hs" class="slide level2">
+<h2>Use in Lib.hs</h2>
+<pre><code>{-# LANGUAGE OverloadedStrings #-}
+
+module Lib
+    ( someFunc
+    ) where
+
+import Model
+
+someFunc :: IO ()
+someFunc = putStrLn $ 
+           show $ 
+           toDo (&quot;something&quot;, &quot;description of something&quot;)
+</code></pre>
 </section></section>
 <section><section id="resources" class="titleslide slide level1"><h1>Resources</h1></section><section id="useful-links" class="slide level2">
 <h2>Useful Links</h2>
